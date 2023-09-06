@@ -22,7 +22,7 @@
 </div>
 
 <div class="row mb-3">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <label for="cover_image" class="form-label">Cover Image</label>
         <input type="url" class="form-control" id="cover_image" name="cover_image"
             value="{{ old('cover_image', $project->cover_image) }}">
@@ -36,13 +36,24 @@
         <input type="date" class="form-control" id="start_date" name="start_date"
             value="{{ old('start_date', $project->start_date) }}">
     </div>
+    <div class="col-md-3">
+        <label for="end_date" class="form-label">End Date</label>
+        <input type="date" class="form-control" id="end_date" name="end_date"
+            value="{{ old('end_date', $project->end_date) }}">
+    </div>
 </div>
 
 <div class="row mb-3">
     <div class="col-md-6">
-        <label for="end_date" class="form-label">End Date</label>
-        <input type="date" class="form-control" id="end_date" name="end_date"
-            value="{{ old('end_date', $project->end_date) }}">
+        <label for="type" class="form-label">Type</label>
+        <select class="form-select" id="type" name="type_id">
+            <option value="">Select Type</option>
+            @foreach ($types as $type)
+                <option value="{{ $type->id }}" @if (old('type_id', $project->type_id) == $type->id) selected @endif>
+                    {{ $type->label }}
+                </option>
+            @endforeach
+        </select>
     </div>
     <div class="col-md-6">
         <label for="category" class="form-label">Category</label>

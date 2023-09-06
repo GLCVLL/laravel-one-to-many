@@ -16,6 +16,7 @@
                         <li class="list-group-item"><strong>Ruolo:</strong> {{ $project->role }}</li>
                         <li class="list-group-item"><strong>Data di Inizio:</strong> {{ $project->start_date }}</li>
                         <li class="list-group-item"><strong>Data di Completamento:</strong> {{ $project->end_date }}</li>
+                        <li class="list-group-item"><strong>Tipo:</strong> {{ $project->type?->label }}</li>
                         <li class="list-group-item"><strong>Visibilità:</strong>
                             {{ $project->visibility ? 'Pubblico' : 'Privato' }}</li>
                     </ul>

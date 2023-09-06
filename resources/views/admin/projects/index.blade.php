@@ -25,6 +25,7 @@
                             <li class="list-group-item"><strong>Tecnologie:</strong> {{ $project->technologies }}</li>
                             <li class="list-group-item"><strong>Cliente:</strong> {{ $project->client }}</li>
                             <li class="list-group-item"><strong>Ruolo:</strong> {{ $project->role }}</li>
+                            <li class="list-group-item"><strong>Tipo:</strong> {{ $project->type?->label }}</li>
                         </ul>
                     </div>
                     <div class="card-footer d-flex">

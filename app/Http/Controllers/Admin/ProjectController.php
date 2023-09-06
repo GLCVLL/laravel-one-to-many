@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
@@ -24,8 +25,9 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project();
+        $types = Type::all();
 
-        return view('admin.projects.create', compact('project'));
+        return view('admin.projects.create', compact('project', 'types'));
     }
 
     /**
@@ -48,6 +50,7 @@ class ProjectController extends Controller
                 'role' => 'required|string',
                 'additional_notes' => 'nullable|string',
                 'visibility' => 'required|boolean',
+                'type_id' => 'nullable|exists:types,id',
             ],
             [
                 'title.required' => 'The title field is mandatory.',
@@ -64,6 +67,8 @@ class ProjectController extends Controller
                 'github_url.url' => 'The GitHub URL must be a valid URL.',
                 'role.required' => 'The role field is mandatory.',
                 'visibility.required' => 'The visibility field is mandatory.',
+                'type_id.exists' => 'the indicated type does not exist',
+
             ]
         );
 
@@ -91,7 +96,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -118,6 +124,8 @@ class ProjectController extends Controller
             'role' => 'required|string',
             'additional_notes' => 'nullable|string',
             'visibility' => 'required|boolean',
+            'type_id' => 'nullable|exists:types,id',
+
         ], [
             'title.required' => 'The title field is mandatory.',
             'title.max' => 'The title field cannot exceed 50 characters.',
@@ -133,6 +141,7 @@ class ProjectController extends Controller
             'github_url.url' => 'The GitHub URL must be a valid URL.',
             'role.required' => 'The role field is mandatory.',
             'visibility.required' => 'The visibility field is mandatory.',
+            'type_id.exists' => 'the indicated type does not exist',
         ]);
 
         $data = $request->all();
